@@ -1,0 +1,81 @@
+!entry _start
+
+failed_to_accept:
+    str $50, "failed to accept client\n"
+    mov r0, 1
+    mov r1, $50
+    mov r2, 23
+    int 2
+
+    mov r0, 1
+    int 0
+
+accept_loop:
+    mov r0, r5
+    int 7
+    mov r4, r0
+    
+    cast r4, i32
+    cmp r4, -1
+    jeq failed_to_accept
+
+    mov r1, $10
+    mov r2, 6
+    int 2
+
+    mov r0, r4
+    mov r1, $30
+    mov r2, 32
+    int 1
+    mov r3, r0
+    
+    add r0, r0, i64($2f)
+    ld r6, r0
+    cmp r6, u8($0a)
+    jne accept_skip
+    str r0, $00
+    
+    sub r0, r0, i64(1)
+    ld r6, r0
+    cmp r6, u8($0d)
+    jne accept_skip
+    str r0, $00
+
+accept_skip:
+    mov r0, r4
+    mov r1, $20
+    mov r2, 9
+    int 2
+
+    mov r0, r4
+    mov r1, $30
+    mov r2, r3
+    int 2
+
+    mov r0, r4
+    mov r1, $29
+    mov r2, 2
+    int 2
+
+    mov r0, r4
+    int 4
+
+    jmp accept_loop
+
+_start:
+    mov sp, $0800
+    
+    str $00, "127.0.0.1:8080"
+    str $10, "name: "
+    str $20, "Welcome, "
+    str $29, "!\n"
+
+    mov r0, $00
+    mov r1, 14
+    mov r2, 1000
+    int 5
+    mov r5, r0
+
+    jmp accept_loop
+
+    halt

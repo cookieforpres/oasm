@@ -1,0 +1,16 @@
+!entry _start
+
+loop:
+    sub r0, r0, 1
+    cmp r0, r1
+    jne loop
+    ret
+
+_start:
+    mov sp, $0800
+    
+    mov r0, 10
+    mov r1, 0
+    call loop
+
+    halt

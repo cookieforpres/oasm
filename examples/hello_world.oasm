@@ -1,0 +1,10 @@
+!entry _start
+
+_start:
+    str $00, "Hello World!\n"
+    mov r0, 1
+    mov r1, $00
+    mov r2, 13
+    int 2
+
+    halt

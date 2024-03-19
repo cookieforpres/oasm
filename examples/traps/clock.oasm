@@ -1,0 +1,45 @@
+!entry _start
+
+sleep:
+    cast r0, i64
+    cast r1, i64
+    mov r1, r0
+    int 20
+    add r1, r1, r0
+sleep_loop:
+    int 20
+    cmp r0, r1
+    jlt sleep_loop
+    ret
+
+print_time:
+    mov r1, 0
+    str $10, "time: "
+    int 20
+    str $00, r0
+    mov r0, $00
+    int 10
+    str r0, $0a
+    add r0, r0, i64(1)
+    push r0
+    mov r0, 1
+    mov r1, $10
+    mov r2, 6
+    int 2
+    mov r0, 1
+    mov r1, $00
+    pop r2
+    int 2
+    ret
+
+_start:
+    mov sp, $0800
+    
+    call print_time
+
+    mov r0, 10000
+    call sleep
+
+    call print_time
+
+    halt
