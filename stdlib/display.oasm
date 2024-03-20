@@ -1,0 +1,2844 @@
+display_write_string:
+    cast r0, u32
+    cast r1, u32
+    cast r2, u32
+    cast r3, u32
+    cast r4, u32
+
+    mov r8, r4
+    mov r4, r0
+    mov r5, r1
+    mov r6, r2
+    mov r7, r3
+    mov r9, r1
+    add r9, r9, r2
+
+display_write_string_loop:
+    ld r3, r5
+    mov r0, r4
+    mov r1, r3
+    mov r2, r7
+    mov r3, r8
+    call display_write_char
+
+    inc r5
+    cmp r5, r9
+    jeq display_write_string_end
+    add r4, r4, 4
+    jmp display_write_string_loop
+
+display_write_string_end:
+    ret
+
+display_write_char:
+    cast r0, u32
+    cast r1, u32
+    cast r2, u32
+    cast r3, u32
+
+    ; addr in r0
+    ; char in r1
+    ; color1 in r2
+    ; color2 in r3
+
+    cmp r1, 65
+    jeq display_write_char_a
+
+    cmp r1, 66
+    jeq display_write_char_b
+
+    cmp r1, 67
+    jeq display_write_char_c
+
+    cmp r1, 68
+    jeq display_write_char_d
+
+    cmp r1, 69
+    jeq display_write_char_e
+
+    cmp r1, 70
+    jeq display_write_char_f
+
+    cmp r1, 71
+    jeq display_write_char_g
+
+    cmp r1, 72
+    jeq display_write_char_h
+
+    cmp r1, 73
+    jeq display_write_char_i
+
+    cmp r1, 74
+    jeq display_write_char_j
+
+    cmp r1, 75
+    jeq display_write_char_k
+
+    cmp r1, 76
+    jeq display_write_char_l
+
+    cmp r1, 77
+    jeq display_write_char_m
+
+    cmp r1, 78
+    jeq display_write_char_n
+
+    cmp r1, 79
+    jeq display_write_char_o
+
+    cmp r1, 80
+    jeq display_write_char_p
+
+    cmp r1, 81
+    jeq display_write_char_q
+
+    cmp r1, 82
+    jeq display_write_char_r
+
+    cmp r1, 83
+    jeq display_write_char_s
+
+    cmp r1, 84
+    jeq display_write_char_t
+
+    cmp r1, 85
+    jeq display_write_char_u
+
+    cmp r1, 86
+    jeq display_write_char_v
+
+    cmp r1, 87
+    jeq display_write_char_w
+
+    cmp r1, 88
+    jeq display_write_char_x
+
+    cmp r1, 89
+    jeq display_write_char_y
+
+    cmp r1, 90
+    jeq display_write_char_z
+
+    cmp r1, 48
+    jeq display_write_char_0
+
+    cmp r1, 49
+    jeq display_write_char_1
+
+    cmp r1, 50
+    jeq display_write_char_2
+
+    cmp r1, 51
+    jeq display_write_char_3
+
+    cmp r1, 52
+    jeq display_write_char_4
+
+    cmp r1, 53
+    jeq display_write_char_5
+
+    cmp r1, 54
+    jeq display_write_char_6
+
+    cmp r1, 55
+    jeq display_write_char_7
+
+    cmp r1, 56
+    jeq display_write_char_8
+
+    cmp r1, 57
+    jeq display_write_char_9
+
+    cmp r1, 32
+    jeq display_write_space
+
+    cmp r1, 33
+    jeq display_write_exclamation_mark
+
+    cmp r1, 34
+    jeq display_write_double_quote
+
+    cmp r1, 35
+    jeq display_write_hashtag
+
+    cmp r1, 36
+    jeq display_write_dollar_sign
+
+    cmp r1, 37
+    jeq display_write_percent
+
+    cmp r1, 38
+    jeq display_write_ampersand
+
+    cmp r1, 39
+    jeq display_write_single_quote
+
+    cmp r1, 40
+    jeq display_write_left_paren
+
+    cmp r1, 41
+    jeq display_write_right_paren
+
+    cmp r1, 42
+    jeq display_write_asterisk
+
+    cmp r1, 43
+    jeq display_write_plus
+
+    cmp r1, 44
+    jeq display_write_comma
+
+    cmp r1, 45
+    jeq display_write_minus
+
+    cmp r1, 46
+    jeq display_write_period
+
+    cmp r1, 47
+    jeq display_write_forward_slash
+
+    cmp r1, 58
+    jeq display_write_colon
+
+    cmp r1, 59
+    jeq display_write_semicolon
+
+    cmp r1, 60
+    jeq display_write_less_than
+
+    cmp r1, 61
+    jeq display_write_equal
+
+    cmp r1, 62
+    jeq display_write_greater_than
+
+    cmp r1, 63
+    jeq display_write_question_mark
+
+    cmp r1, 64
+    jeq display_write_at
+
+    cmp r1, 91
+    jeq display_write_left_bracket
+
+    cmp r1, 92
+    jeq display_write_back_slash
+
+    cmp r1, 93
+    jeq display_write_right_bracket
+
+    cmp r1, 94
+    jeq display_write_caret
+
+    cmp r1, 95
+    jeq display_write_underscore
+
+    cmp r1, 96
+    jeq display_write_backtick
+
+    cmp r1, 123
+    jeq display_write_left_brace
+
+    cmp r1, 124
+    jeq display_write_pipe
+
+    cmp r1, 125
+    jeq display_write_right_brace
+    
+    cmp r1, 126
+    jeq display_write_tilde
+
+    jmp display_write_char_exit
+
+display_write_space:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_exclamation_mark:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_double_quote:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_hashtag:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_dollar_sign:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_percent:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_ampersand:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_single_quote:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_left_paren:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_right_paren:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_asterisk:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_plus:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_comma:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_minus:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_period:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_forward_slash:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_colon:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_semicolon:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_less_than:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_equal:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_greater_than:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_question_mark:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_at:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_left_bracket:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_back_slash:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_right_bracket:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_right_bracket:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_caret:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_underscore:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_backtick:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_left_brace:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_pipe:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_right_brace:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_tilde:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_a:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    jmp display_write_char_exit
+
+display_write_char_b:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_c:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_d:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_e:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_f:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_g:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_h:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_i:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_j:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_k:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_l:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_m:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_n:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_o:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_p:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_q:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_r:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_s:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_t:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_u:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_v:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_w:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_x:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_y:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_z:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_0:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_1:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_2:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_3:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_4:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_5:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_6:
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_7:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+
+    jmp display_write_char_exit
+
+display_write_char_8:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    jmp display_write_char_exit
+
+display_write_char_9:
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+    
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r3
+    add r0, r0, 1
+    str r0, r3
+    add r0, r0, 1
+    str r0, r2
+
+    add r0, r0, 126
+    str r0, r2
+    add r0, r0, 1
+    str r0, r2
+    add r0, r0, 1
+    str r0, r3
+    
+    jmp display_write_char_exit
+
+display_write_char_exit:
+    ret

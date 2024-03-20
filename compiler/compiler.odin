@@ -113,6 +113,8 @@ compile :: proc(c: ^Compiler) {
             for i := 0; i < len(value); i += 1 {
                 c.bytecode[int(addr) + i] = byte(value[i])
             }
+        } else {
+            fmt.printf("warning: possible use of undefined label: %s\n", name)
         }
     }
 }

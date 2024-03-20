@@ -1,0 +1,17 @@
+!entry _start
+!import "stdlib/display.oasm"
+
+_start:
+    mov sp, $0800
+
+    str $00, "CIA.GOV"
+
+    mov r0, u16($bfff)
+    mov r1, u16($00)
+    mov r2, u16(7)
+    mov r3, u16(4)
+    mov r4, u16(0)
+    call display_write_string
+
+loop:
+    jmp loop

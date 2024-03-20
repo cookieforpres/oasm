@@ -1,0 +1,11 @@
+time_sleep:
+    cast r0, i64
+    cast r1, i64
+    mov r1, r0
+    int 20
+    add r1, r1, r0
+time_sleep_loop:
+    int 20
+    cmp r0, r1
+    jlt time_sleep_loop
+    ret

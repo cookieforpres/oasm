@@ -22,8 +22,8 @@ print_usage :: proc(which: string="") {
         case: {
             fmt.printf("usage: %s <command>\n", os.args[0])
             fmt.printf("commands:\n")
-            fmt.printf("- build: compile file to byte code\n")
-            fmt.printf("- run: run compiled file\n")
+            fmt.printf("  build: compile file to byte code\n")
+            fmt.printf("  run: run compiled file\n")
         }
     }
 }
@@ -61,11 +61,18 @@ main :: proc() {
                 os.exit(1)
             }
 
+            render_display := false
+            for i := 0; i < len(os.args); i += 1 {
+                if os.args[i] == "-d" || os.args[i] == "--display" {
+                    render_display = true
+                }
+            }
+
             input_file := os.args[2]
 
             input := utils.read_file_to_bytes(input_file)
             v := vm.new_vm(input)
-            vm.vm_run(&v)
+            vm.vm_run(&v, render_display)
         }
         case: {
             print_usage()

@@ -1,7 +1,7 @@
 .vscode/
 testing/
 syntax/
-main.bin
+*.bin
 main.oasm
 ols.json
 test.txt

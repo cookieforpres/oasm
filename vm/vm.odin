@@ -3,6 +3,8 @@ package vm
 import "core:fmt"
 import "core:os"
 import "core:strings"
+import "core:thread"
+import "vendor:sdl2"
 import "../opcode"
 import "../object"
 
@@ -18,12 +20,15 @@ VM :: struct {
     flags: Flags,
     running: bool,
     debug: bool,
+
+    display: Display
 }
 
 new_vm :: proc(program: []byte) -> VM {
     v := VM{}
     v.program = program
     v.running = true
+    v.display = {nil, nil}
 
     for i := 0; i < REGISTER_CAPACITY-2; i += 1 {
         v.registers[i] = Register{u32(0)}
@@ -37,8 +42,37 @@ new_vm :: proc(program: []byte) -> VM {
     return v
 }
 
-vm_run :: proc(v: ^VM) {
-    for v.running && object.object_as_int(v.registers[REGISTER_PC].o) < len(v.program) {
+vm_run :: proc(v: ^VM, render_display: bool) {
+    if (render_display) {
+        init_sdl := sdl2.Init(sdl2.INIT_VIDEO | sdl2.INIT_EVENTS)
+        if init_sdl != 0 {
+            fmt.printf("error: failed to initalize new display: %s\n", sdl2.GetErrorString())
+            os.exit(1)
+        }
+        v.display = new_display()
+
+        thread.create_and_start_with_poly_data(v, proc(v: ^VM) {
+            a := sdl2.GetTicks()
+            b := sdl2.GetTicks()
+            delta := u32(0)
+
+            for v.running {
+                a = sdl2.GetTicks()
+                delta = a - b
+
+                if delta > SCREEN_TPS {
+                    pixels := make([]byte, PIXEL_COUNT)
+                    for i := 0; i < PIXEL_COUNT; i += 1 {
+                        pixels[i] = object.object_as_u8(v.memory[VRAM_START_ADDR+i])
+                    }
+                    display_draw(v, pixels)
+                    b = a
+                }
+            }
+        })
+    }
+
+    loop: for v.running && object.object_as_int(v.registers[REGISTER_PC].o) < len(v.program) {
         op_byte := read_program(v)
         op := opcode.from_byte(op_byte)
 
@@ -98,6 +132,21 @@ vm_run :: proc(v: ^VM) {
             case: {
                 fmt.printf("error: unhandled opcode: %v\n", op_byte)
                 increment_register(v, REGISTER_PC, 1)
+            }
+        }
+
+        if render_display {
+            event: sdl2.Event
+            for sdl2.PollEvent(&event) {
+                #partial switch event.type {
+                    case .KEYDOWN:
+                        #partial switch event.key.keysym.sym {
+                            case .ESCAPE:
+                                break loop
+                        }
+                    case .QUIT:
+                        break loop
+                }
             }
         }
     }
