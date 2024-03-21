@@ -1,12 +1,12 @@
 !entry _start
-!import "stdlib/display.oasm"
+!import "core/display"
 
 _start:
     mov sp, $0800
 
     str $00, "CIA.GOV"
 
-    mov r0, u16($bfff)
+    mov r0, u16($dd30)
     mov r1, u16($00)
     mov r2, u16(7)
     mov r3, u16(4)

@@ -1,6 +1,6 @@
 !entry _start
-!import "stdlib/display.oasm"
-!import "stdlib/time.oasm"
+!import "core/display"
+!import "core/time"
 
 _start:
     mov r0, u16($bfff)

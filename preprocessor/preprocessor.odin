@@ -12,6 +12,7 @@ Preprocessor :: struct {
     current_token: token.Token,
     peek_token: token.Token,
     pre_output: string,
+    imports: map[string]bool,
 }
 
 new_preprocessor :: proc(l: ^lexer.Lexer) -> Preprocessor {
@@ -70,17 +71,26 @@ handle_import :: proc(p: ^Preprocessor) {
         return
     }
 
+    contents := ""
     file_path := p.current_token.literal
-    file_contents := utils.read_file_to_bytes(file_path)
+    whole_path := fmt.aprintf("%s/%s", os.get_current_directory(), file_path)
+    if !strings.has_suffix(whole_path, ".oasm") {
+        whole_path = fmt.aprintf("%s.oasm", whole_path)
+    }
+    if _, ok := p.imports[whole_path]; !ok {
+        file_contents := utils.read_file_to_bytes(whole_path)
 
-    nl := lexer.new_lexer(file_contents)
-    np := new_preprocessor(&nl)
-    process(&np)
+        nl := lexer.new_lexer(file_contents)
+        np := new_preprocessor(&nl)
+        process(&np)
 
-    contents := output(&np)
+        contents = output(&np)
+        p.imports[whole_path] = true
+    }
+
     raw := fmt.aprintf("!import \"%s\"", file_path)
 
-    p.pre_output, _ = strings.replace_all(p.pre_output, raw, contents)
+    p.pre_output, _ = strings.replace(p.pre_output, raw, contents, 1)
     p.pre_output = strings.trim_space(p.pre_output)
 }
 
