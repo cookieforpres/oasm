@@ -1,9 +1,9 @@
-!entry _start
-!import "core/display"
-!import "core/time"
+@entry _start
+@include "core/display"
+@include "core/time"
 
 _start:
-    mov r0, u16($bfff)
+    mov r0, u16(0xbfff)
     mov r1, u16(65)
     mov r2, u16(4)
     mov r3, u16(0)    
@@ -11,7 +11,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c003)
+    mov r0, u16(0xc003)
     mov r1, u16(66)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -19,7 +19,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c007)
+    mov r0, u16(0xc007)
     mov r1, u16(67)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -27,7 +27,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c00b)
+    mov r0, u16(0xc00b)
     mov r1, u16(68)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -35,7 +35,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c00f)
+    mov r0, u16(0xc00f)
     mov r1, u16(69)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -43,7 +43,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c013)
+    mov r0, u16(0xc013)
     mov r1, u16(70)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -51,7 +51,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c017)
+    mov r0, u16(0xc017)
     mov r1, u16(71)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -59,7 +59,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c01b)
+    mov r0, u16(0xc01b)
     mov r1, u16(72)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -67,7 +67,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c01f)
+    mov r0, u16(0xc01f)
     mov r1, u16(73)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -75,7 +75,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c023)
+    mov r0, u16(0xc023)
     mov r1, u16(74)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -83,7 +83,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c027)
+    mov r0, u16(0xc027)
     mov r1, u16(75)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -91,7 +91,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c02b)
+    mov r0, u16(0xc02b)
     mov r1, u16(76)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -99,7 +99,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c02f)
+    mov r0, u16(0xc02f)
     mov r1, u16(77)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -107,7 +107,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c033)
+    mov r0, u16(0xc033)
     mov r1, u16(78)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -115,7 +115,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c037)
+    mov r0, u16(0xc037)
     mov r1, u16(79)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -123,7 +123,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c03b)
+    mov r0, u16(0xc03b)
     mov r1, u16(80)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -131,7 +131,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c03f)
+    mov r0, u16(0xc03f)
     mov r1, u16(81)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -139,7 +139,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c03f)
+    mov r0, u16(0xc03f)
     mov r1, u16(81)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -147,7 +147,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c043)
+    mov r0, u16(0xc043)
     mov r1, u16(82)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -155,7 +155,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c047)
+    mov r0, u16(0xc047)
     mov r1, u16(83)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -163,7 +163,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c04b)
+    mov r0, u16(0xc04b)
     mov r1, u16(84)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -171,7 +171,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c04f)
+    mov r0, u16(0xc04f)
     mov r1, u16(85)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -179,7 +179,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c053)
+    mov r0, u16(0xc053)
     mov r1, u16(86)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -187,7 +187,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c057)
+    mov r0, u16(0xc057)
     mov r1, u16(87)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -195,7 +195,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c05b)
+    mov r0, u16(0xc05b)
     mov r1, u16(88)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -203,7 +203,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c05f)
+    mov r0, u16(0xc05f)
     mov r1, u16(89)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -211,7 +211,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c063)
+    mov r0, u16(0xc063)
     mov r1, u16(90)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -219,7 +219,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c37f)
+    mov r0, u16(0xc37f)
     mov r1, u16(48)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -227,7 +227,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c383)
+    mov r0, u16(0xc383)
     mov r1, u16(49)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -235,7 +235,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c387)
+    mov r0, u16(0xc387)
     mov r1, u16(50)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -243,7 +243,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c38b)
+    mov r0, u16(0xc38b)
     mov r1, u16(51)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -251,7 +251,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c38f)
+    mov r0, u16(0xc38f)
     mov r1, u16(52)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -259,7 +259,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c393)
+    mov r0, u16(0xc393)
     mov r1, u16(53)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -267,7 +267,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c397)
+    mov r0, u16(0xc397)
     mov r1, u16(54)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -275,7 +275,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c39b)
+    mov r0, u16(0xc39b)
     mov r1, u16(55)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -283,7 +283,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c39f)
+    mov r0, u16(0xc39f)
     mov r1, u16(56)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -291,7 +291,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c3a3)
+    mov r0, u16(0xc3a3)
     mov r1, u16(57)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -299,7 +299,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c6ff)
+    mov r0, u16(0xc6ff)
     mov r1, u16(33)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -307,7 +307,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c703)
+    mov r0, u16(0xc703)
     mov r1, u16(34)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -315,7 +315,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c707)
+    mov r0, u16(0xc707)
     mov r1, u16(35)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -323,7 +323,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c70b)
+    mov r0, u16(0xc70b)
     mov r1, u16(36)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -331,7 +331,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c70f)
+    mov r0, u16(0xc70f)
     mov r1, u16(37)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -339,7 +339,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c713)
+    mov r0, u16(0xc713)
     mov r1, u16(38)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -347,7 +347,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c717)
+    mov r0, u16(0xc717)
     mov r1, u16(39)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -355,7 +355,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c71b)
+    mov r0, u16(0xc71b)
     mov r1, u16(40)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -363,7 +363,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c71f)
+    mov r0, u16(0xc71f)
     mov r1, u16(41)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -371,7 +371,7 @@ _start:
     mov r0, 50
     call time_sleep
     
-    mov r0, u16($c723)
+    mov r0, u16(0xc723)
     mov r1, u16(42)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -379,7 +379,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c727)
+    mov r0, u16(0xc727)
     mov r1, u16(43)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -387,7 +387,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c72b)
+    mov r0, u16(0xc72b)
     mov r1, u16(44)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -395,7 +395,7 @@ _start:
     mov r0, 50
     call time_sleep
     
-    mov r0, u16($c72f)
+    mov r0, u16(0xc72f)
     mov r1, u16(45)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -403,7 +403,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c733)
+    mov r0, u16(0xc733)
     mov r1, u16(46)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -411,7 +411,7 @@ _start:
     mov r0, 50
     call time_sleep
     
-    mov r0, u16($c737)
+    mov r0, u16(0xc737)
     mov r1, u16(47)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -419,7 +419,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c73b)
+    mov r0, u16(0xc73b)
     mov r1, u16(58)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -427,7 +427,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c73f)
+    mov r0, u16(0xc73f)
     mov r1, u16(59)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -435,7 +435,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c743)
+    mov r0, u16(0xc743)
     mov r1, u16(60)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -443,7 +443,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c747)
+    mov r0, u16(0xc747)
     mov r1, u16(61)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -451,7 +451,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c74b)
+    mov r0, u16(0xc74b)
     mov r1, u16(62)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -459,7 +459,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c74f)
+    mov r0, u16(0xc74f)
     mov r1, u16(63)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -467,7 +467,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c753)
+    mov r0, u16(0xc753)
     mov r1, u16(64)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -475,7 +475,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c757)
+    mov r0, u16(0xc757)
     mov r1, u16(91)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -483,7 +483,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c75b)
+    mov r0, u16(0xc75b)
     mov r1, u16(92)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -491,7 +491,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c75f)
+    mov r0, u16(0xc75f)
     mov r1, u16(93)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -499,7 +499,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c763)
+    mov r0, u16(0xc763)
     mov r1, u16(94)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -507,7 +507,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c767)
+    mov r0, u16(0xc767)
     mov r1, u16(95)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -515,7 +515,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c76b)
+    mov r0, u16(0xc76b)
     mov r1, u16(96)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -523,7 +523,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c76f)
+    mov r0, u16(0xc76f)
     mov r1, u16(123)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -531,7 +531,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c773)
+    mov r0, u16(0xc773)
     mov r1, u16(124)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -539,7 +539,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c777)
+    mov r0, u16(0xc777)
     mov r1, u16(125)
     mov r2, u16(4)
     mov r3, u16(0)
@@ -547,7 +547,7 @@ _start:
     mov r0, 50
     call time_sleep
 
-    mov r0, u16($c77b)
+    mov r0, u16(0xc77b)
     mov r1, u16(126)
     mov r2, u16(4)
     mov r3, u16(0)

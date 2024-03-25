@@ -1,30 +1,30 @@
-!entry _start
+@entry _start
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
-    str $00, "name: "
-    str $10, "you entered: "
+    str 0x00, "name: "
+    str 0x10, "you entered: "
 
     mov r0, 1
-    mov r1, $00
+    mov r1, 0x00
     mov r2, 6
     int 2
 
     mov r0, 0
-    mov r1, $20
+    mov r1, 0x20
     mov r2, 32
     int 1
 
     push r0
 
     mov r0, 1
-    mov r1, $10
+    mov r1, 0x10
     mov r2, 13
     int 2
 
     mov r0, 1
-    mov r1, $20
+    mov r1, 0x20
     pop r2
     int 2
 

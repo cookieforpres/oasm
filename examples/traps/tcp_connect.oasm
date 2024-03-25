@@ -1,9 +1,9 @@
-!entry _start
+@entry _start
 
 failed_to_connect:
-    str $50, "failed to connect to server\n"
+    str 0x50, "failed to connect to server\n"
     mov r0, 1
-    mov r1, $50
+    mov r1, 0x50
     mov r2, 28
     int 2
 
@@ -11,12 +11,12 @@ failed_to_connect:
     int 0
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
-    str $00, "127.0.0.1:8080"
-    str $10, "message: "
+    str 0x00, "127.0.0.1:8080"
+    str 0x10, "message: "
 
-    mov r0, $00
+    mov r0, 0x00
     mov r1, 14
     int 6
 
@@ -28,18 +28,18 @@ _start:
 
 loop:
     mov r0, 1
-    mov r1, $10
+    mov r1, 0x10
     mov r2, 9
     int 2
 
     mov r0, 0
-    mov r1, $20
+    mov r1, 0x20
     mov r2, 32
     int 1
     mov r4, r0
 
     mov r0, r5
-    mov r1, $20
+    mov r1, 0x20
     mov r2, r4
     int 2
     

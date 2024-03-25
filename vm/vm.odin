@@ -7,6 +7,7 @@ import "core:thread"
 import "vendor:sdl2"
 import "../opcode"
 import "../object"
+import "../utils"
 
 // TODO: make these cli args
 REGISTER_CAPACITY :: 16
@@ -540,7 +541,7 @@ handle_str_reg_str :: proc(v: ^VM) {
     addr := object.object_as_int(v.registers[register].o)
 
     if v.debug {
-        fmt.printf("str %s, \"%s\"\n", register_from_id(register), unescape_string(str))
+        fmt.printf("str %s, \"%s\"\n", register_from_id(register), utils.unescape_string(str))
     }
 
     for i := 0; i < len(str); i += 1 {
@@ -556,7 +557,7 @@ handle_str_imm_str :: proc(v: ^VM) {
     increment_register(v, REGISTER_PC, 1)
 
     if v.debug {
-        fmt.printf("str %v, \"%s\"\n", addr, unescape_string(str))
+        fmt.printf("str %v, \"%s\"\n", addr, utils.unescape_string(str))
     }
 
     for i := 0; i < len(str); i += 1 {

@@ -1,4 +1,4 @@
-!entry _start
+@entry _start
 
 loop:
     sub r0, r0, 1
@@ -7,7 +7,7 @@ loop:
     ret
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
     mov r0, 10
     mov r1, 0

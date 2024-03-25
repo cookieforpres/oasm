@@ -1,30 +1,30 @@
-!entry _start
+@entry _start
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
-    str $30, "from program"
+    str 0x30, "from program"
 
-    str $00, "test.txt"
-    mov r0, $00
+    str 0x00, "test.txt"
+    mov r0, 0x00
     mov r1, 8
     mov r2, 2
     mov r3, 0
     int 3
     mov r5, r0
 
-    mov r1, $10
+    mov r1, 0x10
     mov r2, 32
     int 1
     mov r4, r0
 
     mov r0, 1
-    mov r1, $10
+    mov r1, 0x10
     mov r2, r4
     int 2
 
     mov r0, r5
-    mov r1, $30
+    mov r1, 0x30
     mov r2, 12
     int 2
 

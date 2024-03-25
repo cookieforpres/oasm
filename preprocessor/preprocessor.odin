@@ -12,11 +12,13 @@ Preprocessor :: struct {
     current_token: token.Token,
     peek_token: token.Token,
     pre_output: string,
-    imports: map[string]bool,
+    includes: map[string]bool,
+    definitions: map[string]string,
+    only_includes: bool,
 }
 
-new_preprocessor :: proc(l: ^lexer.Lexer) -> Preprocessor {
-    p := Preprocessor {lexer = l, pre_output = transmute(string)l.input}
+new_preprocessor :: proc(l: ^lexer.Lexer, only_includes: bool) -> Preprocessor {
+    p := Preprocessor {lexer = l, pre_output = transmute(string)l.input, only_includes = only_includes}
 
     next_token(&p)
     next_token(&p)
@@ -25,28 +27,49 @@ new_preprocessor :: proc(l: ^lexer.Lexer) -> Preprocessor {
 }
 
 process :: proc(p: ^Preprocessor) {
-    for p.current_token.kind != .Eof {
-        if p.current_token.kind == .Entry {
-            handle_entry(p)
-        }
+    handle_directives(p, .Include, false, handle_include)
 
-        next_token(p)
+    if !p.only_includes {
+        handle_directives(p, .Define, true, handle_define)
+        handle_directives(p, .Entry, true, handle_entry)
+        replace_definitions(p)
     }
+}
 
-    nl := lexer.new_lexer(transmute([]byte)p.pre_output)
-    reset_lexer(p, &nl)
+output :: proc(p: ^Preprocessor) -> string {
+    return p.pre_output
+}
 
+@(private)
+handle_directives :: proc(p: ^Preprocessor, kind: token.TokenKind, reset_lex: bool, handler: proc(p: ^Preprocessor)) {
+    if reset_lex {
+        nl := lexer.new_lexer(transmute([]byte)p.pre_output)
+        reset_lexer(p, &nl)
+    }
+    
     for p.current_token.kind != .Eof {
-        if p.current_token.kind == .Import {
-            handle_import(p)
+        if p.current_token.kind == kind {
+            handler(p)
         }
 
         next_token(p)
     }
 }
 
-output :: proc(p: ^Preprocessor) -> string {
-    return p.pre_output
+@(private)
+replace_definitions :: proc(p: ^Preprocessor) {
+    keysd: [dynamic]string
+    for key in p.definitions {
+        append(&keysd, key)
+    }
+
+    keys := no_dynamics(keysd)
+    utils.bubble_sort_string_slice(keys)
+
+    for key in keys {
+        value := p.definitions[key]
+        p.pre_output, _ = strings.replace_all(p.pre_output, strings.trim_space(key), strings.trim_space(value))
+    }
 }
 
 @(private)
@@ -56,7 +79,7 @@ handle_entry :: proc(p: ^Preprocessor) {
     }
 
     entry := p.current_token.literal
-    raw := fmt.aprintf("!entry %s", entry)
+    raw := fmt.aprintf("@entry %s", entry)
 
     p.pre_output, _ = strings.replace_all(p.pre_output, raw, "")
     p.pre_output = strings.trim_space(p.pre_output)
@@ -66,7 +89,7 @@ handle_entry :: proc(p: ^Preprocessor) {
 }
 
 @(private)
-handle_import :: proc(p: ^Preprocessor) {
+handle_include :: proc(p: ^Preprocessor) {
     if !expect_peek(p, .String) {
         return
     }
@@ -77,21 +100,65 @@ handle_import :: proc(p: ^Preprocessor) {
     if !strings.has_suffix(whole_path, ".oasm") {
         whole_path = fmt.aprintf("%s.oasm", whole_path)
     }
-    if _, ok := p.imports[whole_path]; !ok {
+    if _, ok := p.includes[whole_path]; !ok {
         file_contents := utils.read_file_to_bytes(whole_path)
 
         nl := lexer.new_lexer(file_contents)
-        np := new_preprocessor(&nl)
+        np := new_preprocessor(&nl, true)
         process(&np)
 
         contents = output(&np)
-        p.imports[whole_path] = true
+
+        p.includes[whole_path] = true
     }
 
-    raw := fmt.aprintf("!import \"%s\"", file_path)
+    raw := fmt.aprintf("@include \"%s\"", file_path)
 
     p.pre_output, _ = strings.replace(p.pre_output, raw, contents, 1)
     p.pre_output = strings.trim_space(p.pre_output)
+}
+
+@(private)
+handle_define :: proc(p: ^Preprocessor) {
+    if !expect_peek(p, .Identifier) {
+        return
+    }
+
+    key := p.current_token.literal
+    value: string
+
+    next_token(p)
+    #partial switch p.current_token.kind {
+        case .NumberU8: fallthrough
+        case .NumberU16: fallthrough
+        case .NumberU32: fallthrough
+        case .NumberU64: fallthrough
+        case .NumberU128: fallthrough
+        case .NumberI8: fallthrough
+        case .NumberI16: fallthrough
+        case .NumberI32: fallthrough
+        case .NumberI64: fallthrough
+        case .NumberI128: fallthrough
+        case .NumberF32: fallthrough
+        case .NumberF64: {
+            value = p.current_token.literal
+        }
+        case .String: {
+            value = fmt.aprintf("\"%s\"", utils.unescape_string(p.current_token.literal))
+        }
+        case .Register: {
+            value = fmt.aprintf("r%s", p.current_token.literal)
+        }
+        case: {
+            expect_error(p, false, .Register, .NumberU8, .NumberU16, .NumberU32, .NumberU64, .NumberU128, .NumberI8, .NumberI16, .NumberI32, .NumberI64, .NumberI128, .NumberF32, .NumberF64, .String)
+        }
+    }
+
+    raw := fmt.aprintf("@define %s %s", key, value)
+    p.pre_output, _ = strings.replace_all(p.pre_output, raw, "")
+    p.pre_output = strings.trim_space(p.pre_output)
+
+    p.definitions[key] = value
 }
 
 @(private)
@@ -134,4 +201,13 @@ expect_peek :: proc(p: ^Preprocessor, kind: token.TokenKind) -> bool {
 
     expect_error(p, true, kind)
     return false
+}
+
+@(private)
+no_dynamics :: proc(values: [dynamic]string) -> []string {
+    out := make([]string, len(values))
+    for i := 0; i < len(values); i += 1 {
+        out[i] = values[i]
+    }
+    return out
 }

@@ -1,9 +1,9 @@
-!entry _start
+@entry _start
 
 failed_to_accept:
-    str $50, "failed to accept client\n"
+    str 0x50, "failed to accept client\n"
     mov r0, 1
-    mov r1, $50
+    mov r1, 0x50
     mov r2, 23
     int 2
 
@@ -19,41 +19,41 @@ accept_loop:
     cmp r4, -1
     jeq failed_to_accept
 
-    mov r1, $10
+    mov r1, 0x10
     mov r2, 6
     int 2
 
     mov r0, r4
-    mov r1, $30
+    mov r1, 0x30
     mov r2, 32
     int 1
     mov r3, r0
     
-    add r0, r0, i64($2f)
+    add r0, r0, i64(0x2f)
     ld r6, r0
-    cmp r6, u8($0a)
+    cmp r6, u8(0x0a)
     jne accept_skip
-    str r0, $00
+    str r0, 0x00
     
     sub r0, r0, i64(1)
     ld r6, r0
-    cmp r6, u8($0d)
+    cmp r6, u8(0x0d)
     jne accept_skip
-    str r0, $00
+    str r0, 0x00
 
 accept_skip:
     mov r0, r4
-    mov r1, $20
+    mov r1, 0x20
     mov r2, 9
     int 2
 
     mov r0, r4
-    mov r1, $30
+    mov r1, 0x30
     mov r2, r3
     int 2
 
     mov r0, r4
-    mov r1, $29
+    mov r1, 0x29
     mov r2, 2
     int 2
 
@@ -63,14 +63,14 @@ accept_skip:
     jmp accept_loop
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
-    str $00, "127.0.0.1:8080"
-    str $10, "name: "
-    str $20, "Welcome, "
-    str $29, "!\n"
+    str 0x00, "127.0.0.1:8080"
+    str 0x10, "name: "
+    str 0x20, "Welcome, "
+    str 0x29, "!\n"
 
-    mov r0, $00
+    mov r0, 0x00
     mov r1, 14
     mov r2, 1000
     int 5

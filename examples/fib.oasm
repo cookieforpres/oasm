@@ -1,4 +1,4 @@
-!entry _start
+@entry _start
 
 fib:
     mov r0, 0
@@ -19,18 +19,18 @@ fib_loop:
     ret
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
     
     mov r3, 32          ; nth
     call fib
 
-    str $00, r2
-    mov r0, $00
-    mov r1, $00
+    str 0x00, r2
+    mov r0, 0x00
+    mov r1, 0x00
     int 10
 
     mov r3, r0
-    add r3, r3, i64($00)
+    add r3, r3, i64(0x00)
     str r3, 10
     add r0, r0, i64(1)
     mov r3, r0

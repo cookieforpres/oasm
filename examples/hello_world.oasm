@@ -1,9 +1,9 @@
-!entry _start
+@entry _start
 
 _start:
-    str $00, "Hello World!\n"
+    str 0x00, "Hello World!\n"
     mov r0, 1
-    mov r1, $00
+    mov r1, 0x00
     mov r2, 13
     int 2
 

@@ -1,4 +1,4 @@
-!import "core/strings"
+@include "core/strings"
 
 display_write_string:
     cast r0, u32

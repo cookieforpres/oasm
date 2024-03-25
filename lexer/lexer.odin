@@ -146,16 +146,9 @@ has_explicit_type :: proc(ident: string) -> (string, token.TokenKind, bool) {
             return "", .Identifier, false
         }
         return value, .NumberF64, true
-    } else if strings.has_prefix(ident, "$") {
-        value := ident[1:]
+    } else if strings.has_prefix(ident, "0x") {
+        value := ident[2:]
         num, ok := strconv.parse_uint(value, 16)
-        if !ok {
-            return "", .Identifier, false
-        }
-        return fmt.aprintf("%d", num), .NumberU32, true
-    } else if strings.has_prefix(ident, "#") {
-        value := ident[1:]
-        num, ok := strconv.parse_uint(value, 10)
         if !ok {
             return "", .Identifier, false
         }
@@ -248,6 +241,12 @@ read_decimal :: proc(l: ^Lexer) -> token.Token {
     // TODO: very shitty way of doing this, values that dont end in a whitespace will be a number ('-1meow', '32.1)', etc)
 	integer := read_number(l)
 	if is_empty(l.ch) || is_whitespace(l.ch) || l.ch == ',' {
+        if strings.has_prefix(integer, "0x") {
+            value := integer[2:]
+            num, _ := strconv.parse_uint(value, 16)
+            integer = fmt.aprintf("%d", num)
+        }
+
 		if strings.contains(integer, "-") {
             return token.Token{literal = integer, kind = .NumberI32}
         } else {

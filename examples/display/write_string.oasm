@@ -1,13 +1,13 @@
-!entry _start
-!import "core/display"
+@entry _start
+@include "core/display"
 
 _start:
-    mov sp, $0800
+    mov sp, 0x0800
 
-    str $00, "CIA.GOV"
+    str 0x00, "CIA.GOV"
 
-    mov r0, u16($dd30)
-    mov r1, u16($00)
+    mov r0, u16(0xdd30)
+    mov r1, u16(0x00)
     mov r2, u16(7)
     mov r3, u16(4)
     mov r4, u16(0)

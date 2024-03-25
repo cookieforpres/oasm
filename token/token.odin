@@ -56,10 +56,11 @@ TokenKind :: enum {
     Jge,
     Call,
     Ret,
-    Debug,
 
     Entry,
-    Import,
+    Include,
+    Define,
+    Debug,
 
     TypeU8,
     TypeU16,
@@ -129,10 +130,11 @@ lookup_identifier :: proc(ident: string) -> TokenKind {
         case "jge": return .Jge
         case "call": return .Call
         case "ret": return .Ret
-        case "debug": return .Debug
 
-        case "!entry": return .Entry
-        case "!import": return .Import
+        case "@entry": return .Entry
+        case "@include": return .Include
+        case "@define": return .Define
+        case "@debug": return .Debug
 
         case "u8": return .TypeU8
         case "u16": return .TypeU16

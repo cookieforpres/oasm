@@ -7,5 +7,5 @@ time_sleep:
 time_sleep_loop:
     int 20
     cmp r0, r1
-    jlt time_sleep_loop
+    jle time_sleep_loop
     ret

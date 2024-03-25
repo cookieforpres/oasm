@@ -1,0 +1,17 @@
+@define SYS_STDIN 0
+@define SYS_STDOUT 1
+@define SYS_STDERR 2
+
+@define TRAP_EXIT 0
+@define TRAP_READ 1
+@define TRAP_WRITE 2
+@define TRAP_OPEN 3
+@define TRAP_CLOSE 4
+@define TRAP_LISTEN_TCP 5
+@define TRAP_CONNECT_TCP 6
+@define TRAP_ACCPET_TCP 7
+@define TRAP_IOTA 10
+@define TRAP_CLOCK 20
+
+@define EXIT_SUCCESS 0
+@define EXIT_ERROR 1

@@ -43,17 +43,29 @@ main :: proc() {
                 os.exit(1)
             }
 
+            dump := false
+            for i := 0; i < len(os.args); i += 1 {
+                if os.args[i] == "--dump" {
+                    dump = true
+                }
+            }
+
             input_file := os.args[2]
             output_file := os.args[3]
 
             input := utils.read_file_to_bytes(input_file)
             l := lexer.new_lexer(input)
-            p := preprocessor.new_preprocessor(&l)
+            p := preprocessor.new_preprocessor(&l, false)
             preprocessor.process(&p)
             l = lexer.new_lexer(transmute([]byte)preprocessor.output(&p))
             c := compiler.new_compiler(&l)
-            compiler.compile(&c)
-            compiler.write_to_file(&c, output_file)
+
+            if dump {
+                compiler.dump(&c)
+            } else {
+                compiler.compile(&c)
+                compiler.write_to_file(&c, output_file)
+            }
         }
         case "run": {
             if len(os.args) < 3 {
